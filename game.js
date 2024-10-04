@@ -8,6 +8,7 @@ let score = 0;
 // Initialize game
 function initializeGame() {
     grid = Array.from({ length: 4 }, () => Array(4).fill(0));
+    score = 0;
     spawnTile();
     spawnTile();
     updateBoard();
@@ -44,7 +45,7 @@ function updateBoard() {
     scoreDisplay.textContent = score;
 }
 
-// Handle tile movement (Left)
+// Move Left
 function moveLeft() {
     let moved = false;
     for (let i = 0; i < 4; i++) {
@@ -68,20 +69,104 @@ function moveLeft() {
     }
 }
 
-// Similar logic can be applied for other directions
-// moveRight(), moveUp(), moveDown()
+// Move Right
+function moveRight() {
+    let moved = false;
+    for (let i = 0; i < 4; i++) {
+        let newRow = grid[i].filter(num => num !== 0);
+        for (let j = newRow.length - 1; j > 0; j--) {
+            if (newRow[j] === newRow[j - 1]) {
+                newRow[j] *= 2;
+                score += newRow[j];
+                newRow.splice(j - 1, 1);
+            }
+        }
+        while (newRow.length < 4) {
+            newRow.unshift(0);
+        }
+        if (newRow.toString() !== grid[i].toString()) moved = true;
+        grid[i] = newRow;
+    }
+    if (moved) {
+        spawnTile();
+        updateBoard();
+    }
+}
+
+// Move Up
+function moveUp() {
+    let moved = false;
+    for (let col = 0; col < 4; col++) {
+        let newColumn = [];
+        for (let row = 0; row < 4; row++) {
+            if (grid[row][col] !== 0) {
+                newColumn.push(grid[row][col]);
+            }
+        }
+        for (let i = 0; i < newColumn.length - 1; i++) {
+            if (newColumn[i] === newColumn[i + 1]) {
+                newColumn[i] *= 2;
+                score += newColumn[i];
+                newColumn.splice(i + 1, 1);
+            }
+        }
+        while (newColumn.length < 4) {
+            newColumn.push(0);
+        }
+        for (let row = 0; row < 4; row++) {
+            if (grid[row][col] !== newColumn[row]) moved = true;
+            grid[row][col] = newColumn[row];
+        }
+    }
+    if (moved) {
+        spawnTile();
+        updateBoard();
+    }
+}
+
+// Move Down
+function moveDown() {
+    let moved = false;
+    for (let col = 0; col < 4; col++) {
+        let newColumn = [];
+        for (let row = 0; row < 4; row++) {
+            if (grid[row][col] !== 0) {
+                newColumn.push(grid[row][col]);
+            }
+        }
+        for (let i = newColumn.length - 1; i > 0; i--) {
+            if (newColumn[i] === newColumn[i - 1]) {
+                newColumn[i] *= 2;
+                score += newColumn[i];
+                newColumn.splice(i - 1, 1);
+            }
+        }
+        while (newColumn.length < 4) {
+            newColumn.unshift(0);
+        }
+        for (let row = 0; row < 4; row++) {
+            if (grid[row][col] !== newColumn[row]) moved = true;
+            grid[row][col] = newColumn[row];
+        }
+    }
+    if (moved) {
+        spawnTile();
+        updateBoard();
+    }
+}
 
 // Handle key input
 document.addEventListener('keydown', (e) => {
     switch (e.key) {
         case 'ArrowLeft': moveLeft(); break;
-        // Add other directions here
+        case 'ArrowRight': moveRight(); break;
+        case 'ArrowUp': moveUp(); break;
+        case 'ArrowDown': moveDown(); break;
     }
 });
 
 // Reset game button
 resetBtn.addEventListener('click', () => {
-    score = 0;
     initializeGame();
 });
 
