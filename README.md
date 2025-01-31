@@ -3,7 +3,7 @@
 A web-based implementation of the popular 2048 puzzle game blt using "HTML", "CSS", and "JavaScript". Players combine numbered tiles by sliding them across the grid, aiming to reach the 2048 tile by merging smaller tiles.
 
  Demo
-You can play the game by visiting [Live Demo]().(`https://number2048-game.netlify.app/`)
+You can play the game by visiting [Live Demo]().*(`https://number2048-game.netlify.app/`)*
  Features
 - "Simple Sliding Mechanics": Use the arrow keys to slide tiles in different directions (left, right, up, down).
 - "Score Tracking": The game tracks your score as you combine tiles.
