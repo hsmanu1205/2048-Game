@@ -45,114 +45,93 @@ function updateBoard() {
     scoreDisplay.textContent = score;
 }
 
-// Move Left
+// Move and merge functions
 function moveLeft() {
     let moved = false;
     for (let i = 0; i < 4; i++) {
-        let newRow = grid[i].filter(num => num !== 0);
-        for (let j = 0; j < newRow.length - 1; j++) {
-            if (newRow[j] === newRow[j + 1]) {
-                newRow[j] *= 2;
-                score += newRow[j];
-                newRow.splice(j + 1, 1);
+        let row = grid[i].filter(val => val); // Remove zeros
+        for (let j = 0; j < row.length - 1; j++) {
+            if (row[j] === row[j + 1]) {
+                row[j] *= 2;
+                score += row[j];
+                row[j + 1] = 0;
             }
         }
-        while (newRow.length < 4) {
-            newRow.push(0);
-        }
-        if (newRow.toString() !== grid[i].toString()) moved = true;
-        grid[i] = newRow;
+        row = row.filter(val => val); // Remove zeros again
+        while (row.length < 4) row.push(0);
+        if (JSON.stringify(grid[i]) !== JSON.stringify(row)) moved = true;
+        grid[i] = row;
     }
-    if (moved) {
-        spawnTile();
-        updateBoard();
-    }
+    if (moved) spawnTile();
+    updateBoard();
 }
 
-// Move Right
 function moveRight() {
     let moved = false;
     for (let i = 0; i < 4; i++) {
-        let newRow = grid[i].filter(num => num !== 0);
-        for (let j = newRow.length - 1; j > 0; j--) {
-            if (newRow[j] === newRow[j - 1]) {
-                newRow[j] *= 2;
-                score += newRow[j];
-                newRow.splice(j - 1, 1);
+        let row = grid[i].filter(val => val);
+        for (let j = row.length - 1; j > 0; j--) {
+            if (row[j] === row[j - 1]) {
+                row[j] *= 2;
+                score += row[j];
+                row[j - 1] = 0;
             }
         }
-        while (newRow.length < 4) {
-            newRow.unshift(0);
-        }
-        if (newRow.toString() !== grid[i].toString()) moved = true;
-        grid[i] = newRow;
+        row = row.filter(val => val);
+        while (row.length < 4) row.unshift(0);
+        if (JSON.stringify(grid[i]) !== JSON.stringify(row)) moved = true;
+        grid[i] = row;
     }
-    if (moved) {
-        spawnTile();
-        updateBoard();
-    }
+    if (moved) spawnTile();
+    updateBoard();
 }
 
-// Move Up
 function moveUp() {
     let moved = false;
-    for (let col = 0; col < 4; col++) {
-        let newColumn = [];
-        for (let row = 0; row < 4; row++) {
-            if (grid[row][col] !== 0) {
-                newColumn.push(grid[row][col]);
+    for (let j = 0; j < 4; j++) {
+        let col = [];
+        for (let i = 0; i < 4; i++) col.push(grid[i][j]);
+        col = col.filter(val => val);
+        for (let i = 0; i < col.length - 1; i++) {
+            if (col[i] === col[i + 1]) {
+                col[i] *= 2;
+                score += col[i];
+                col[i + 1] = 0;
             }
         }
-        for (let i = 0; i < newColumn.length - 1; i++) {
-            if (newColumn[i] === newColumn[i + 1]) {
-                newColumn[i] *= 2;
-                score += newColumn[i];
-                newColumn.splice(i + 1, 1);
-            }
-        }
-        while (newColumn.length < 4) {
-            newColumn.push(0);
-        }
-        for (let row = 0; row < 4; row++) {
-            if (grid[row][col] !== newColumn[row]) moved = true;
-            grid[row][col] = newColumn[row];
+        col = col.filter(val => val);
+        while (col.length < 4) col.push(0);
+        for (let i = 0; i < 4; i++) {
+            if (grid[i][j] !== col[i]) moved = true;
+            grid[i][j] = col[i];
         }
     }
-    if (moved) {
-        spawnTile();
-        updateBoard();
-    }
+    if (moved) spawnTile();
+    updateBoard();
 }
 
-// Move Down
 function moveDown() {
     let moved = false;
-    for (let col = 0; col < 4; col++) {
-        let newColumn = [];
-        for (let row = 0; row < 4; row++) {
-            if (grid[row][col] !== 0) {
-                newColumn.push(grid[row][col]);
+    for (let j = 0; j < 4; j++) {
+        let col = [];
+        for (let i = 0; i < 4; i++) col.push(grid[i][j]);
+        col = col.filter(val => val);
+        for (let i = col.length - 1; i > 0; i--) {
+            if (col[i] === col[i - 1]) {
+                col[i] *= 2;
+                score += col[i];
+                col[i - 1] = 0;
             }
         }
-        for (let i = newColumn.length - 1; i > 0; i--) {
-            if (newColumn[i] === newColumn[i - 1]) {
-                newColumn[i] *= 2;
-                score += newColumn[i];
-                newColumn.splice(i - 1, 1);
-            }
-        }
-        while (newColumn.length < 4) {
-            newColumn.unshift(0);
-        }
-        for (let row = 0; row < 4; row++) {
-            if (grid[row][col] !== newColumn[row]) moved = true;
-            grid[row][col] = newColumn[row];
+        col = col.filter(val => val);
+        while (col.length < 4) col.unshift(0);
+        for (let i = 0; i < 4; i++) {
+            if (grid[i][j] !== col[i]) moved = true;
+            grid[i][j] = col[i];
         }
     }
-    if (moved) {
-        spawnTile();
-        updateBoard();
-    }
+    if (moved) spawnTile();
+    updateBoard();
 }
 
 // Handle key input
