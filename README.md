@@ -8,7 +8,7 @@
 </p>
 A beautifully designed web implementation of the popular 2048 puzzle game. Combine numbered tiles by sliding them across the grid, aiming to create the elusive **2048 tile**!
 
-[![Live Demo](https://img.shields.io/badge/Play_Now-Online-brightgreen?style=for-the-badge&logo=netlify)](https://number2048-game.netlify.app/)
+[![Live Demo](https://img.shields.io/badge/Play_Now-Online-brightgreen?style=for-the-badge&logo=netlify)](https://game-2048-harshit.netlify.app/)
 
 ## ✨ Features
 
