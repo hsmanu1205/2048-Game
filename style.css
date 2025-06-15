@@ -1,142 +1,195 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background: url('https://shorturl.at/4fDEY') no-repeat center center/cover;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+  overflow-x: hidden;
 }
 
 .container {
-    text-align: center;
-    margin-top: 50px;
+  text-align: center;
+  margin-top: 80px;
+  animation: float 6s ease-in-out infinite;
+  transform-style: preserve-3d;
 }
 
-.profile-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
-.profile-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 4px solid #1329f3;
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 h1 {
-    font-size: 48px;
-    color: #0fe2e9;
-    font-family: cursive;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: #0fe2e9;
+  font-family: 'Pacifico', cursive;
+  text-shadow: 0 0 10px #0fe2e9, 0 0 20px #0fe2e9;
+  margin-bottom: 20px;
 }
 
 #game-board {
-    width: 400px;
-    height: 400px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
-    background-color: #b0a0bb;
-    padding: 10px;
-    border-radius: 10px;
+  width: 90vw;
+  max-width: 420px;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  transform: rotateX(6deg);
 }
 
 .tile {
-    width: 90px;
-    height: 90px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 28px;
-    font-weight: bold;
-    color: #fff;
-    border-radius: 5px;
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(1rem, 6vw, 2rem);
+  font-weight: bold;
+  color: #fff;
+  border-radius: 12px;
+  transform-style: preserve-3d;
+  background: #2c3e50;
+  box-shadow:
+    inset 0 0 12px rgba(255, 255, 255, 0.2),
+    0 6px 15px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.tile[data-value="0"] {
-    background-color: #cdc1b4;
+.tile:hover {
+  transform: scale(1.05) rotateX(8deg);
+  box-shadow:
+    0 10px 20px rgba(0, 255, 255, 0.4),
+    inset 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
-.tile[data-value="2"] {
-    background-color: #eee4da;
-    color: #776e65;
-}
-
-.tile[data-value="4"] {
-    background-color: #ede0c8;
-    color: #776e65;
-}
-
-.tile[data-value="8"] {
-    background-color: #f2b179;
-}
-
-.tile[data-value="16"] {
-    background-color: #f59563;
-}
-
-.tile[data-value="32"] {
-    background-color: #f67c5f;
-}
-
-.tile[data-value="64"] {
-    background-color: #f65e3b;
-}
-
-.tile[data-value="128"] {
-    background-color: #edcf72;
-}
-
-.tile[data-value="256"] {
-    background-color: #edcc61;
-}
-
-.tile[data-value="512"] {
-    background-color: #edc850;
-}
-
-.tile[data-value="1024"] {
-    background-color: #edc53f;
-}
-
-.tile[data-value="2048"] {
-    background-color: #edc22e;
-}
+.tile[data-value="0"]  { background: #333; color: #666; }
+.tile[data-value="2"]  { background: #eee4da; color: #776e65; }
+.tile[data-value="4"]  { background: #ede0c8; color: #776e65; }
+.tile[data-value="8"]  { background: #f2b179; }
+.tile[data-value="16"] { background: #f59563; }
+.tile[data-value="32"] { background: #f67c5f; }
+.tile[data-value="64"] { background: #f65e3b; }
+.tile[data-value="128"]{ background: #edcf72; }
+.tile[data-value="256"]{ background: #edcc61; }
+.tile[data-value="512"]{ background: #edc850; }
+.tile[data-value="1024"]{background: #edc53f; }
+.tile[data-value="2048"]{background: #edc22e; }
 
 .info {
-    margin-top: 20px;
-    font-size: 24px;
-    color: #776e65;
+  margin-top: 25px;
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 }
 
 #reset-btn {
-    padding: 10px 20px;
-    background-color: #8f7a66;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+  margin-top: 15px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #00c3ff, #ffff1c);
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
 #reset-btn:hover {
-    background-color: #776e65;
+  transform: scale(1.05) rotateX(5deg);
+  background: linear-gradient(135deg, #00ffb3, #ff0099);
+}
+
+.profile-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #0fe2e9;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+  object-fit: cover;
+}
+
+.profile-img:hover {
+  transform: scale(1.1) rotateY(20deg);
 }
 
 footer {
-    margin-top: 20px;
-    padding: 10px;
-    text-align: center;
-    font-size: 18px;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    position: absolute;
-    bottom: 0;
+  padding: 20px 10px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  position: relative;
+  bottom: 0;
+  backdrop-filter: blur(8px);
+  z-index: 1;
+}
+
+footer .email {
+  display: block;
+  margin: 8px 0;
+  color: #0fe2e9;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer .email:hover {
+  color: #00ffb3;
+  text-decoration: underline;
+}
+
+.social-links {
+  margin-top: 10px;
+}
+
+.social-link {
+  color: #0fe2e9;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.social-link:hover {
+  color: #00ffb3;
+}
+
+@media screen and (max-width: 480px) {
+  #game-board {
+    max-width: 90vw;
+    gap: 5px;
+  }
+
+  .tile {
+    font-size: 5vw;
+  }
+
+  .profile-img {
+    width: 60px;
+    height: 60px;
+  }
 }

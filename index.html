@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2048 Game</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2048 Game</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-        <div class="profile-container">
-        <img src="https://tinyurl.com/wswwzfjx" alt="Profile Picture" class="profile-img">
+  <main>
+    <div class="profile-container">
+      <img
+        src="https://scontent.fdel27-5.fna.fbcdn.net/v/t39.30808-6/506054264_2803526136512477_1589273481106206883_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=686Sc_cBj38Q7kNvwF_4kTV&_nc_oc=AdlHPh19z1DC6m43b6YK3NgfTHK59fQMdoUW8rfH_rrvOMl6eEeUcNNd6z8ah_Ow6BSNQ7GSFeHwj55uyCc4vvjS&_nc_zt=23&_nc_ht=scontent.fdel27-5.fna&_nc_gid=ymqoWQ3vYdEcpcRKrsrgRw&oh=00_AfPT7hOwombm8V4At46laCloq3x4qxU91whgQIVf4KZgHA&oe=6854997E"
+        alt="Profile Image"
+        class="profile-img"
+        style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%;"
+      />
     </div>
+
     <div class="container">
-        <h1>2048 Game</h1>
-        <div id="game-board">
-            <!-- The game grid will be dynamically generated using JavaScript -->
-        </div>
-        <div class="info">
-            <div>Score: <span id="score">0</span></div>
-            <button id="reset-btn">Reset Game</button>
-        </div>
+      <h1>2048 Game</h1>
+      <div id="game-board"></div>
+      <div class="info">
+        <div>Score: <span id="score">0</span></div>
+        <button id="reset-btn">Reset Game</button>
+      </div>
     </div>
-    <footer>
-        <p>Contact: <a href="mailto:harshit.singh.hs9454@gmail.com">harshit.singh.hs9454@gmail.com</a></p>
-        <p>
-            <a href="https://github.com/hsmanu1205" target="_blank" rel="noopener">GitHub</a> |
-            <a href="https://linkedin.com/in/harshitsingh1205" target="_blank" rel="noopener">LinkedIn</a>
-        </p>
-     </footer>
-    <script src="game.js"></script>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <a href="mailto:harshit.singh.hs9454@gmail.com" class="email">harshit.singh.hs9454@gmail.com</a>
+      <div class="social-links">
+        <a href="https://github.com/hsmanu1205" target="_blank" class="social-link">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a href="https://linkedin.com/in/harshitsingh1205" target="_blank" class="social-link">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+      </div>
+      <p class="copyright">© 2024 Harshit Singh. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="game.js"></script>
 </body>
 </html>
