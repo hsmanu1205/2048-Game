@@ -1,6 +1,4 @@
-Here's an enhanced README.md with visual improvements using icons, fonts, and layout enhancements:
-
-# 🎮 2048 Game
+# 🎮 [2048 Game](https://game-2048-harshit.netlify.app/)
 
 <p align="center">
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML">
